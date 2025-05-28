@@ -10,5 +10,4 @@ spec:
   ports:
   - port: 3000
     protocol: TCP
-    nodePort: 30001
-  type: LoadBalancer
+  type: ClusterIP

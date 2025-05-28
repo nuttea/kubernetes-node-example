@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: node-example
-        image: huseyinbabal/node-example
+        image: nuttea/node-example
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

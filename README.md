@@ -1,5 +1,5 @@
-Node.js application for tutorial series
+Node.js application example
 
-Part-1 => https://blog.kloia.com/deploy-auto-scalable-node-js-application-on-kubernetes-cluster-part-1-f40e622f2337
+docker build -t nuttea/node-example .
 
-Part-2 => https://blog.kloia.com/deploy-auto-scalable-node-js-application-on-kubernetes-cluster-part-2-d41164d72dcb
+docker push nuttea/node-example
