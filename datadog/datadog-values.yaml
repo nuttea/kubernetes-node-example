@@ -1,0 +1,47 @@
+registry: "public.ecr.aws/datadog"
+clusterAgent:
+  enabled: true
+  replicas: 2
+  createPodDisruptionBudget: true
+  admissionController:
+    enabled: true
+datadog:
+  logLevel: INFO
+  clusterName: "<CLUSTER_NAME>" # Change to your Cluster Name
+  apiKeyExistingSecret: "datadog-secret"
+  site: "datadoghq.com"
+  tags:
+    - "env:dev"
+    - "team:example-team"
+  apm:
+    instrumentation:
+      enabled: true
+      targets:
+        - name: "example-web"
+          namespaceSelector:
+            matchNames:
+              - "example-web"
+          podSelector:
+            matchLabels:
+              app: node-example
+          ddTraceVersions:
+            js: "5"
+  logs:
+    enabled: true
+    containerCollectAll: true
+  asm:
+    threats:
+      enabled: true
+    sca:
+      enabled: true
+    iast:
+      enabled: true
+  serviceMonitoring:
+    enabled: true
+  networkMonitoring:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+    processDiscovery: true
+    containerCollection: true

@@ -5,6 +5,9 @@ metadata:
   labels:
     app: node-example
     apm-enabled: "true"
+    tags.datadoghq.com/env: "dev"
+    tags.datadoghq.com/service: "node-example"
+    tags.datadoghq.com/version: "1.0.0"
 spec:
   replicas: 3
   selector:
@@ -15,6 +18,9 @@ spec:
       labels:
         app: node-example
         apm-enabled: "true"
+        tags.datadoghq.com/env: "dev"
+        tags.datadoghq.com/service: "node-example"
+        tags.datadoghq.com/version: "1.0.0"
     spec:
       containers:
       - name: node-example
@@ -39,3 +45,16 @@ spec:
             port: 3000
           initialDelaySeconds: 5
           periodSeconds: 10
+        env:
+          - name: DD_ENV
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['tags.datadoghq.com/env']
+          - name: DD_SERVICE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['tags.datadoghq.com/service']
+          - name: DD_VERSION 
+            valueFrom: 
+              fieldRef: 
+                fieldPath: metadata.labels['tags.datadoghq.com/version']
