@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: not-example
+  labels:
+    app: not-example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: not-example
+  template:
+    metadata:
+      labels:
+        app: not-example
+    spec:
+      containers:
+      - name: not-example
+        image: nuttea/node-example
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources:
+            limits:
+              cpu: "0.5"
+            requests:
+              cpu: "0.25"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
